@@ -13,7 +13,7 @@ import { AuthService } from "./services/auth.service";
 })
 
 export class AppComponent implements OnInit {
-  title = 'siwfood';
+  title = 'siwpers';
   username: string | null = '';
   userId: number | null = null;
 
