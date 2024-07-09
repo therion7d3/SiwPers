@@ -1,4 +1,4 @@
-import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Event} from "../models/event.model";
 import {EventService} from "../services/event.service";
 import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";

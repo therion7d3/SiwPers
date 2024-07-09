@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Event } from '../models/event.model';
-import {Ricette} from "../endpoints";
 import {ImageService} from "./image.service";
 
 @Injectable({
