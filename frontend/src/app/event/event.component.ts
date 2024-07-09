@@ -71,7 +71,7 @@ export class EventComponent implements OnInit{
   }
 
   loadEvent(id: number): void {
-    this.eventService.getEventoById(id)
+    this.eventService.getEventById(id)
       .subscribe(
         (data) => {
           this.event = {

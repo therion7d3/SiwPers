@@ -9,7 +9,7 @@
         <div class="form-group">
           <label for="titolo">Titolo</label>
           <div class="space"></div>
-          <input type="text" class="form-control" id="titolo" placeholder="Inserisci il titolo della tua ricetta"
+          <input type="text" class="form-control" id="titolo" placeholder="Inserisci il titolo del tuo evento"
                  [(ngModel)]="event.title" name="title" required #title="ngModel">
 
           <div class="space"></div>
@@ -89,7 +89,7 @@
 
           <!-- Pulsante Salva posizionato sulla destra -->
           <div class="d-flex justify-content-end mb-3">
-            <button type="submit" class="btn btn-success" [disabled]="!form.valid || formSubmitted">Salva Ricetta</button>
+            <button type="submit" class="btn btn-success rounded-pill" [disabled]="!form.valid || formSubmitted">Salva Evento</button>
           </div>
           <div class="alert alert-success" *ngIf="formSubmitted">
             {{ successMessage }}

@@ -20,11 +20,11 @@ export class EventService {
     return this.http.get<Event[]>(this.baseUrl);
   }
 
-  getRicetteMadeByUser(userId: number): Observable<Event[]> {
+  getEventsMadeByUser(userId: number): Observable<Event[]> {
     return this.http.get<Event[]>(this.baseUrl + "/organizer/" + userId);
   }
 
-  getEventoById(id: number): Observable<Event> {
+  getEventById(id: number): Observable<Event> {
     return this.http.get<Event>(this.baseUrl + "/" + id);
   }
 

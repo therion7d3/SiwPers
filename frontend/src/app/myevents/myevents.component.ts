@@ -31,7 +31,7 @@ export class MyeventsComponent implements OnInit {
   caricaRicette(): void {
     const userId = this.authService.getUserId();
     if (userId) {
-      this.eventService.getRicetteMadeByUser(userId)
+      this.eventService.getEventsMadeByUser(userId)
         .subscribe(
           (data) => {
             this.events = data.map(event => ({

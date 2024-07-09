@@ -135,14 +135,14 @@
               <img [src]="imagePreview" alt="Anteprima Immagine" class="img-thumbnail" style="max-width: 200px;">
             </div>
 
-            <button class="btn btn-danger me-2" data-bs-toggle="modal" data-bs-target="#confirmationModal">
-              <i class="bi bi-trash"></i> Elimina Ricetta
+            <button class="btn btn-danger me-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#confirmationModal">
+              <i class="bi bi-trash"></i> Elimina Evento
             </button>
             <div class="d-flex justify-content-end gap-3">
-              <button class="btn btn-secondary" (click)="cancelEdit()" style="background-color: #9b857e; border-color: #9b857e;">
+              <button class="btn btn-secondary rounded-pill" (click)="cancelEdit()" style="background-color: #9b857e; border-color: #9b857e;">
                 <i class="bi bi-x-circle"></i> Annulla
               </button>
-              <button class="btn btn-primary me-2" type="button" (click)="saveChanges()" [disabled]="!isFormValid(form)" style="background-color: #ff4500; border-color: #ff4500;">
+              <button class="btn btn-primary rounded-pill me-2" type="button" (click)="saveChanges()" [disabled]="!isFormValid(form)" style="background-color: #ff4500; border-color: #ff4500;">
                 <i class="bi bi-check-circle"></i> Salva
               </button>
             </div>
@@ -152,7 +152,7 @@
 
         <!-- Pulsante per iniziare la editmode -->
         <div class="d-flex justify-content-end">
-          <button *ngIf="isEventOwner() && !editMode" class="btn text-white" style="background-color: #ff4500; border-color: #ff4500;" (click)="toggleEditMode()">
+          <button *ngIf="isEventOwner() && !editMode" class="btn text-white rounded-pill" style="background-color: #ff4500; border-color: #ff4500;" (click)="toggleEditMode()">
             <i class="bi bi-pencil"></i> Modifica
           </button>
         </div>
@@ -164,15 +164,15 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="confirmationModalLabel">Conferma Eliminazione Ricetta</h5>
+          <h5 class="modal-title" id="confirmationModalLabel">Conferma Eliminazione Evento</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          Sei sicuro di voler eliminare questa ricetta?
+          Sei sicuro di voler eliminare questo evento?
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="deleteEvent()">Elimina</button>
+          <button type="button" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal">Annulla</button>
+          <button type="button" class="btn btn-danger rounded-pill" data-bs-dismiss="modal" (click)="deleteEvent()">Elimina</button>
         </div>
       </div>
     </div>
