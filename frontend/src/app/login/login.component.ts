@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit{
           localStorage.setItem('role', response.role[0].name);
           this.appComponent.ngOnInit();
           setTimeout(() => {
-            this.router.navigate(['/']).then(r => this.success && this.requested);
+            this.router.navigate(['/']).then();
           }, 2000);
         }
       },

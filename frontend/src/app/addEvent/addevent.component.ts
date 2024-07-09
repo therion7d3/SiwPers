@@ -31,7 +31,8 @@ export class AddeventComponent {
     immagineUrl: '',
     immagineUrl2: '',
     immagineUrl3: '',
-    dataEvento: ''
+    dataEvento: '',
+    indirizzo: ''
   }
 
   formSubmitted: boolean = false;

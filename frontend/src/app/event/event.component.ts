@@ -32,7 +32,8 @@ export class EventComponent implements OnInit{
     immagineUrl: '',
     immagineUrl2: '',
     immagineUrl3: '',
-    dataEvento: ''
+    dataEvento: '',
+    indirizzo: ''
   };
   event!: Event;
   editMode = false;

@@ -45,6 +45,7 @@ public class EventController {
             int maxTickets = requestBody.get("maxTickets").asInt();
             String tipoEvento = requestBody.get("tipoEvento").asText();
             String dataEvento = requestBody.get("dataEvento").asText();
+            String indirizzo = requestBody.get("indirizzo").asText();
 
 
             User eventOwner = (User)userService.loadById(userId);
@@ -53,6 +54,7 @@ public class EventController {
                 return ResponseEntity.notFound().build();
             }
 
+            newEvent.setIndirizzo(indirizzo);
             newEvent.setTitle(title);
             newEvent.setDescription(description);
             newEvent.setOwner(eventOwner);
@@ -146,6 +148,7 @@ public class EventController {
             int maxTickets = requestBody.get("maxTickets").asInt();
             String tipoEvento = requestBody.get("tipoEvento").asText();
             String dataEvento = requestBody.get("dataEvento").asText();
+            String indirizzo = requestBody.get("indirizzo").asText();
 
             User autore = (User) userService.loadById(userId);
 
@@ -154,6 +157,7 @@ public class EventController {
             }
 
             savedEvent.setTitle(title);
+            savedEvent.setIndirizzo(indirizzo);
             savedEvent.setMaxTickets(maxTickets);
             savedEvent.setTipoEvento(tipoEvento);
             savedEvent.setDataEvento(dataEvento);

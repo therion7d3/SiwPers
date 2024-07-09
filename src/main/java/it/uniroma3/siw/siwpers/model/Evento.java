@@ -20,6 +20,9 @@ public class Evento {
     @Column(length = 500)
     private String description;
 
+    @Column(name = "indirizzo")
+    private String indirizzo;
+
     @Column(name = "max_biglietti")
     private int maxTickets;
 
@@ -126,6 +129,13 @@ public class Evento {
 
     public String getDataEvento() {
         return dataEvento;
+    }
+
+    public String getIndirizzo() {
+        return indirizzo;
+    }
+    public void setIndirizzo(String indirizzo) {
+        this.indirizzo = indirizzo;
     }
 
     @Override

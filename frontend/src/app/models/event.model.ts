@@ -14,6 +14,7 @@ export interface Event {
   immagineUrl2?: string;
   immagineUrl3?: string;
   dataEvento: string;
+  indirizzo: string;
 }
 
 

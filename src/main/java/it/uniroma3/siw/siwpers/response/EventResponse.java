@@ -14,6 +14,7 @@ public class EventResponse {
     private final byte[] immagine2;
     private final byte[] immagine3;
     private final String dataEvento;
+    private final String indirizzo;
 
     public EventResponse(Evento event) {
         this.id = event.getId();
@@ -24,6 +25,7 @@ public class EventResponse {
         this.maxTickets = event.getMaxTickets();
         this.tipoEvento = event.getTipoEvento();
         this.dataEvento = event.getDataEvento();
+        this.indirizzo = event.getIndirizzo();
         if (!event.getImages().isEmpty()) {
             this.immagine1 = (event.getImages().get(0) != null) ? event.getImages().get(0).getData() : new byte[0];
         }
@@ -76,6 +78,10 @@ public class EventResponse {
 
     public byte[] getImmagine3() {
         return immagine3;
+    }
+
+    public String getIndirizzo() {
+        return indirizzo;
     }
 
     public Long getId() {

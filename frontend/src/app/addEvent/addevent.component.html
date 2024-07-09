@@ -25,6 +25,16 @@
             <i class="bi bi-exclamation-triangle"></i> La descrizione è obbligatoria e deve essere inferiore a 500 caratteri.
           </div>
 
+          <label for="titolo">Indirizzo del Luogo</label>
+          <div class="space"></div>
+          <input type="text" class="form-control" id="address" placeholder="Inserisci il luogo dove si svolgerà il tuo evento"
+                 [(ngModel)]="event.indirizzo" name="address" required #address="ngModel">
+
+          <div class="space"></div>
+          <div *ngIf="address.invalid && (address.dirty || address.touched)" class="alert alert-warning">
+            <i class="bi bi-exclamation-triangle"></i> Inserisci un indirizzo valido.
+          </div>
+
           <div class="space"></div>
           <label for="maxTickets">Capienza</label>
           <div class="space"></div>
