@@ -1,0 +1,91 @@
+<section class="background" style="background-color: #fff5ea;">
+  <div class="container">
+    <div class="space"></div>
+
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+          <h1 class="display-4 animate__animated animate__fadeInDown" style="font-family: 'Brush Script MT', cursive; color: #ff4500;">I tuoi eventi</h1>
+          <h5 class="animate__animated animate__fadeInUp" style="font-family: 'Courier New', Courier, monospace; color: #ffa07a;">Tutti gli eventi che hai organizzato tu!</h5>
+        </div>
+      </div>
+    </div>
+
+    <div class="space"></div>
+
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6">
+        <div *ngIf="events && events.length > 0">
+          <div *ngFor="let event of events" class="card mb-4 animate__animated animate__fadeInUp">
+            <div class="card-header d-flex justify-content-between align-items-center text-white" style="background-color: #f5ad67;">
+              <h5 class="card-title m-0">{{ event.title }}</h5>
+              <i class="bi bi-alarm-fill fs-4"></i>
+            </div>
+            <div class="card-body" style="background-color: #fee2c7">
+
+              <!-- Contenitore Immagine -->
+              <div class="image-container mb-3" style="max-width: 100%; height: 200px; overflow: hidden;">
+                <img *ngIf="event.immagine1 && event.immagine1.trim().length > 0"
+                     [src]="event.immagineUrl"
+                     alt="Immagine dell'evento"
+                     class="img-fluid rounded shadow-sm"
+                     style="width: 100%; height: 100%; object-fit: contain;" loading="lazy">
+                <div *ngIf="!event.immagine1 || event.immagine1.trim().length === 0"
+                     class="bg-secondary text-white d-flex justify-content-center align-items-center"
+                     style="width: 100%; height: 100%;">
+                  Nessuna immagine
+                </div>
+              </div>
+
+              <!-- Pulsanti della card dell'evento -->
+              <div class="justify-content-center d-flex gap-3">
+                <button class="btn d-flex align-items-center justify-content-center rounded-pill animate__animated animate__bounceIn"
+                        data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" (click)="selectedEvent = event"
+                        style="background-color: #ff4500; border-color: #ff4500;">
+                  <span class="bi text-white bi-trash-fill me-2"></span>
+                  <span class="text-white">Elimina</span>
+                </button>
+
+                <a href="/events/{{ event.id }}" class="btn btn-success d-flex align-items-center justify-content-center rounded-pill animate__animated animate__bounceIn"
+                  style="background-color: #5cb10f; border-color: #5cb10f;">
+                  <span class="bi text-white bi-arrow-up-right-circle-fill me-2"></span>
+                  <span class="text-white">Visualizza</span>
+                </a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div *ngIf="events && events.length === 0" class="text-center mt-4">
+          <p>Nessun evento trovato.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-5">
+      <button class="btn btn-primary btn-add-event rounded-pill shadow-lg animate__animated animate__fadeIn" style="background-color: #ff8c00; border-color: #ff8c00;">
+        <a href="/organizzaevento" class="text-white d-flex justify-content-center align-items-center w-100 h-100" style="text-decoration: none;">
+          <i class="bi bi-calendar-plus-fill fs-3 me-2"></i> Organizza un evento
+        </a>
+      </button>
+    </div>
+  </div>
+
+  <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="confirmDeleteModalLabel">Conferma Eliminazione</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Sei sicuro di voler eliminare l'evento "{{ selectedEvent?.title }}"?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="deleteEvent(selectedEvent?.id)">Elimina</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

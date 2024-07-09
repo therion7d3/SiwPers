@@ -1,0 +1,32 @@
+<section class="background d-flex align-items-center justify-content-center" style="background-color: #fff5ea; min-height: 100vh;">
+<div *ngIf="userList && userList.length > 0" class="container">
+  <div class="text-center mb-4">
+    <h1 class="display-4 animate__animated animate__fadeInDown" style="font-family: 'Brush Script MT', cursive; color: #ff4500;">AuraEventi</h1>
+    <h5 class="animate__animated animate__fadeInUp" style="font-family: 'Courier New', Courier, monospace; color: #ffa07a;">I nostri organizzatori</h5>
+  </div>
+  <div class="row">
+    <div *ngFor="let user of userList" class="col-12 mb-3">
+      <div class="card animate__animated animate__fadeInUp">
+        <div class="card-body d-flex align-items-center" style="background-color: #fff5ea;">
+          <div class="text-left flex-grow-1">
+            <h5 class="card-title">{{ user.nome }} {{ user.cognome }}</h5>
+            <p class="card-text"><strong>Data di Nascita:</strong> {{ user.dataNascita }}</p>
+          </div>
+          <div *ngIf="user.profilePicture" class="text-right">
+            <img [src]="user.profilePicture" class="img-thumbnail rounded-top-circle" style="max-width: 100px;" alt="Immagine Profilo">
+          </div>
+        </div>
+        <div class="card-footer d-flex justify-content-end" style="background-color: #ff9736;">
+          <a [attr.href]="'organizzatori/' + user.id" class="btn rounded-pill"  style="background-color: #ffffff;">
+            <i class="bi bi-person me-1"></i> Visualizza Profilo
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="userList && userList.length === 0" class="container">
+  <p class="mt-4">Nessun utente trovato.</p>
+</div>
+</section>

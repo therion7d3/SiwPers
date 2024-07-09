@@ -1,0 +1,38 @@
+<section class="background d-flex align-items-center justify-content-center" style="background-color: #fff5ea; min-height: 100vh;">
+  <div class="container py-5 d-flex flex-column align-items-center justify-content-center">
+    <div class="text-center mb-4">
+      <h1 class="display-4 animate__animated animate__fadeInDown" style="font-family: 'Brush Script MT', cursive; color: #ff4500;">AuraEventi</h1>
+      <h5 class="animate__animated animate__fadeInUp" style="font-family: 'Courier New', Courier, monospace; color: #ffa07a;">Pronto a divertirti?</h5>
+    </div>
+
+    <div class="d-flex flex-wrap justify-content-center" style="max-width: 100%;">
+      <!-- Event cards -->
+      <div *ngFor="let event of events" class="card m-2 border-0 shadow" style="width: 350px; height: 500px; background-color: #fff;">
+        <div class="card-body d-flex flex-column align-items-center">
+          <div class="text-center mb-3">
+            <i class="bi bi-person"></i> Organizzatore: {{ event.ownerName }}
+          </div>
+          <div class="mb-3 text-center">
+            <img *ngIf="event.immagineUrl" [src]="event.immagineUrl" alt="Immagine evento" class="img-fluid mb-3 rounded shadow" style="max-width: 300px; max-height: 200px;">
+            <div *ngIf="!event.immagineUrl" class="d-flex justify-content-center align-items-center mb-3 rounded shadow" style="width: 300px; height: 200px; background-color: #eeeeee;">
+              <span style="color: #777;">Nessuna immagine</span>
+            </div>
+          </div>
+          <h5 class="text-center">{{ event.title }}</h5>
+          <a href="/events/{{event.id}}" class="btn btn-primary mt-auto align-self-center rounded-pill" style="background-color: #ff4500; border-color: #ff4500; width: 100%;">
+            <i class="bi bi-info-circle"></i> Informazioni evento
+          </a>
+          <a href="/organizzatori/{{ event.ownerId }}" class="btn btn-sm mt-2 align-self-center rounded-pill" style="color: #ff4500; border-color: #ff4500; width: 100%;">
+            <i class="bi bi-person"></i> {{ event.ownerName }}
+          </a>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Pulsante per visualizzare tutti gli organizzatori -->
+    <a href="/organizzatori" class="btn btn-primary mt-4 rounded-pill animate__animated animate__fadeInUp" style="background-color: #ff4500; border-color: #ff4500;">
+      <i class="bi bi-people"></i> Visualizza tutti gli organizzatori
+    </a>
+  </div>
+</section>

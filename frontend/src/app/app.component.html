@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-lg navbar-expand" style="background-color: #fedfc2;">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Titolo centrato come footer con link alla home -->
+    <div class="navbar-footer text-center">
+      <a class="nav-link" href="/" routerLink="/">
+        <h6 class="mb-0 display-6" style="font-family: 'Brush Script MT', cursive; color: #ff4500;">AuraEventi</h6>
+      </a>
+    </div>
+
+    <!-- Mostra solo se l'utente è autenticato -->
+    <div class="collapse navbar-collapse" id="navbarNavDarkDropdown" *ngIf="authService.isAuthenticatedUser()">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link align-items-center" href="#" (click)="logout()">
+            <i class="bi bi-box-arrow-right"></i> Esci
+          </a>
+        </li>
+        <!-- Divider -->
+        <ng-container *ngIf="username">
+          <li class="nav-item">
+            <a class="nav-link align-items-center" href="/myprofile">
+              <i class="bi bi-person-badge-fill"></i> {{username}}
+            </a>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+
+    <!-- Mostra solo se l'utente non è autenticato -->
+    <a class="btn me-md-3 btn-sm ms-auto" *ngIf="!authService.isAuthenticatedUser()" href="http://localhost:4200/login">Accedi</a>
+  </div>
+</nav>
+
+
+
+
+
+<router-outlet></router-outlet>

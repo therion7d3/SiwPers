@@ -1,0 +1,21 @@
+.vh-1000 {
+  min-height: 100vh; /* Altezza minima del 100% del viewport */
+  background-color: #fff3cf;
+  padding-bottom: 20px; /* Aggiungi padding in basso per spazio tra la section e il footer */
+}
+
+.img-placeholder {
+  width: 100%; /* Larghezza desiderata per l'immagine placeholder */
+  height: 200px; /* Altezza desiderata per l'immagine placeholder */
+  background-color: #f0f0f0; /* Colore di sfondo dell'immagine placeholder */
+  border-radius: 8px; /* Arrotondamento dei bordi, se necessario */
+}
+
+.card {
+  min-width: 250px; /* Larghezza minima della card */
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}

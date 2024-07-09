@@ -1,0 +1,180 @@
+<section class="background" style="background-color: #fff5ea;">
+    <div class="card-list animate__animated animate__fadeIn" *ngIf="event">
+
+      <div class="card-header text-center text-white" style="background-color: #ff9224;">
+        <h1>
+          <span *ngIf="editMode">
+            <i class="bi bi-pencil-square"></i> Modifica Evento
+          </span>
+          <span *ngIf="!editMode">
+            <i class="bi bi-calendar2-event"></i> {{ event.title }}
+          </span>
+        </h1>
+      </div>
+      <div class="card-body d-flex flex-column justify-content-between" style="min-width: 800px; min-height: 400px; background-color: #feeed9;">
+
+        <ng-container *ngIf="!editMode">
+          <div class="text-center animate__animated animate__fadeIn">
+            <a href="/organizzatori/{{ event.ownerId }}" class="btn btn-sm rounded-pill" style="color: #ff4500; border-color: #ff4500;">
+              <i class="bi bi-person-circle"></i> {{ event.ownerName }}
+            </a>
+            <div class="space"></div>
+          </div>
+
+          <!-- Tipologia Evento -->
+          <h5 class="text-start">Tipologia: {{ event.tipoEvento }}</h5>
+          <div class="space"></div>
+
+          <!-- Capienza Evento -->
+          <h5 class="text-start">Capienza: {{ event.maxTickets }} persone</h5>
+          <div class="space"></div>
+
+          <!-- Data Evento -->
+          <h5 class="text-start">Data: {{ event.dataEvento }} </h5>
+          <div class="space"></div>
+
+          <!-- Immagine 1 -->
+          <div class="image-container mb-3" *ngIf="event.immagineUrl && event.immagineUrl.trim()">
+            <img [src]="event.immagineUrl" alt="Immagine evento" class="card-image img-fluid rounded animate__animated animate__fadeIn" style="max-width: 100%; max-height: 200px;">
+          </div>
+          <div class="image-container mb-3" *ngIf="!event.immagineUrl || !event.immagineUrl.trim()">
+            <div class="image-placeholder mb-3 rounded" style="width: 100%; height: 200px; background-color: #eeeeee; display: flex; justify-content: center; align-items: center;">
+              Nessuna immagine disponibile
+            </div>
+          </div>
+
+          <!-- Immagine 2 -->
+          <div class="image-container mb-3" *ngIf="event.immagineUrl2 && event.immagineUrl2.trim()">
+            <img [src]="event.immagineUrl2" alt="Immagine evento" class="card-image img-fluid rounded animate__animated animate__fadeIn" style="max-width: 100%; max-height: 200px;">
+          </div>
+
+          <!-- Descrizione -->
+          <h5 class="card-title text-start">Descrizione dell'evento:</h5>
+          <p>{{ event.description }}</p>
+
+          <!-- Immagine 3 -->
+          <div class="image-container mb-3" *ngIf="event.immagineUrl3 && event.immagineUrl3.trim()">
+            <img [src]="event.immagineUrl3" alt="Immagine evento" class="card-image img-fluid rounded animate__animated animate__fadeIn" style="max-width: 100%; max-height: 200px;">
+          </div>
+
+          <div class="space"></div>
+        </ng-container>
+
+
+        <!-- Container per la EditMode -->
+        <ng-container *ngIf="editMode">
+          <form #form="ngForm">
+            <div class="form-group mb-3">
+              <label for="title">Titolo</label>
+              <input type="text" class="form-control" id="title" [(ngModel)]="modifiedEvent.title" name="title" maxlength="244" required>
+            </div>
+            <div class="form-group mb-3">
+              <label for="description">Descrizione</label>
+              <textarea class="form-control" id="description" rows="3" [(ngModel)]="modifiedEvent.description" name="description" maxlength="499" required></textarea>
+              <div *ngIf="form.controls['description'].invalid && (form.controls['description'].dirty || form.controls['description'].touched)" class="text-danger">
+                La descrizione è obbligatoria e deve essere inferiore a 500 caratteri.
+              </div>
+            </div>
+
+            <div class="space"></div>
+            <label for="maxTickets">Capienza</label>
+            <div class="space"></div>
+            <input type="number" class="form-control" id="maxTickets" placeholder="Inserisci la capienza massima dell'evento"
+                   [(ngModel)]="modifiedEvent.maxTickets" name="maxTickets" required min="25" #maxTickets="ngModel">
+            <div class="space"></div>
+            <div *ngIf="maxTickets.invalid && (maxTickets.dirty || maxTickets.touched)" class="alert alert-warning">
+              <i class="bi bi-exclamation-triangle"></i> Inserisci una capienza valida (minimo 25 persone).
+            </div>
+
+            <div class="space"></div>
+            <label for="dataEvento">Data Evento</label>
+            <div class="space"></div>
+            <input type="date" class="form-control" id="dataEvento" placeholder="Seleziona la data dell'evento"
+                   [(ngModel)]="modifiedEvent.dataEvento" name="dataEvento" required [min]="todayDate()" #dataEvento="ngModel">
+            <div class="space"></div>
+            <div *ngIf="!isValidDate() && (dataEvento.dirty || dataEvento.touched)" class="alert alert-warning">
+              <i class="bi bi-exclamation-triangle"></i> Inserisci una data valida superiore a oggi.
+            </div>
+
+            <div class="space"></div>
+            <label for="tipologiaEvento">Tipologia Evento</label>
+            <div class="space"></div>
+            <select class="form-control" id="tipologiaEvento" [(ngModel)]="modifiedEvent.tipoEvento" name="eventType" required>
+              <option value="" disabled selected>Scegli la tipologia di evento</option>
+              <option value="Conferenza">Conferenza</option>
+              <option value="Esposizione">Esposizione</option>
+              <option value="Festival">Festival</option>
+              <option value="Concerto">Concerto</option>
+              <option value="Aziendale">Aziendale</option>
+            </select>
+
+            <!-- Caricamento delle immagini -->
+            <div class="mb-3">
+              <label for="image1" class="form-label">Immagine principale</label>
+              <input type="file" id="image1" class="form-control" (change)="onImageSelected($event, 1)">
+              <img *ngIf="modifiedEvent.immagineUrl" [src]="modifiedEvent.immagineUrl" class="img-fluid mt-2" alt="Immagine principale" style="max-width: 100%; max-height: 300px;">
+              <div class="image-container" *ngIf="(!event.immagineUrl || !event.immagineUrl.trim()) && (!modifiedEvent.immagineUrl || !modifiedEvent.immagineUrl?.trim())">
+                <div class="image-placeholder mb-3 rounded"></div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="image2" class="form-label">Seconda immagine</label>
+              <input type="file" id="image2" class="form-control" (change)="onImageSelected($event, 2)">
+              <img *ngIf="modifiedEvent.immagineUrl2" [src]="modifiedEvent.immagineUrl2" class="img-fluid mt-2" alt="Seconda immagine" style="max-width: 100%; max-height: 300px;">
+            </div>
+
+            <div class="mb-3">
+              <label for="image3" class="form-label">Terza immagine</label>
+              <input type="file" id="image3" class="form-control" (change)="onImageSelected($event, 3)">
+              <img *ngIf="modifiedEvent.immagineUrl3" [src]="modifiedEvent.immagineUrl3" class="img-fluid mt-2" alt="Terza immagine" style="max-width: 100%; max-height: 300px;">
+            </div>
+            <div class="form-group mb-3" *ngIf="imagePreview">
+              <label>Anteprima Immagine</label>
+              <div class="minispace"></div>
+              <img [src]="imagePreview" alt="Anteprima Immagine" class="img-thumbnail" style="max-width: 200px;">
+            </div>
+
+            <button class="btn btn-danger me-2" data-bs-toggle="modal" data-bs-target="#confirmationModal">
+              <i class="bi bi-trash"></i> Elimina Ricetta
+            </button>
+            <div class="d-flex justify-content-end gap-3">
+              <button class="btn btn-secondary" (click)="cancelEdit()" style="background-color: #9b857e; border-color: #9b857e;">
+                <i class="bi bi-x-circle"></i> Annulla
+              </button>
+              <button class="btn btn-primary me-2" type="button" (click)="saveChanges()" [disabled]="!isFormValid(form)" style="background-color: #ff4500; border-color: #ff4500;">
+                <i class="bi bi-check-circle"></i> Salva
+              </button>
+            </div>
+          </form>
+        </ng-container>
+
+
+        <!-- Pulsante per iniziare la editmode -->
+        <div class="d-flex justify-content-end">
+          <button *ngIf="isEventOwner() && !editMode" class="btn text-white" style="background-color: #ff4500; border-color: #ff4500;" (click)="toggleEditMode()">
+            <i class="bi bi-pencil"></i> Modifica
+          </button>
+        </div>
+      </div>
+    </div>
+
+  <!-- Modal di conferma eliminazione -->
+  <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="confirmationModalLabel">Conferma Eliminazione Ricetta</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Sei sicuro di voler eliminare questa ricetta?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="deleteEvent()">Elimina</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

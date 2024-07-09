@@ -1,0 +1,58 @@
+<section class="vh-100" style="background-color: #fff5ea;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-10 animate__animated animate__fadeIn">
+        <div class="card" style="border-radius: 1rem; background-color: #fce6da;">
+          <div class="row g-0">
+            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+              <div class="card-body p-4 p-lg-5 text-black">
+                <form>
+                  <div class="text-center mb-4">
+                    <h1 class="display-4 animate__animated animate__fadeInDown" style="font-family: 'Brush Script MT', cursive; color: #ff4500;">AuraEventi</h1>
+                    <h5 class="animate__animated animate__fadeInUp" style="font-family: 'Courier New', Courier, monospace; color: #000000;">Accedi al tuo account</h5>
+                  </div>
+                  <div class="space"></div>
+                  <div class="form-outline animate__animated animate__fadeIn">
+                    <label class="form-label" for="inputEmail">
+                      <i class="bi bi-envelope-fill"></i> Indirizzo E-mail
+                    </label>
+                    <input type="email" id="inputEmail" class="form-control form-control-lg" [(ngModel)]="username" name="email" placeholder="E-mail" autofocus="">
+                  </div>
+                  <div class="form-outline animate__animated animate__fadeIn">
+                    <label class="form-label" for="inputPassword">
+                      <i class="bi bi-lock-fill"></i> Password
+                    </label>
+                    <input type="password" id="inputPassword" class="form-control form-control-lg" [(ngModel)]="password" name="password" placeholder="Password" required="">
+                  </div>
+                  <div class="space"></div>
+                  <div class="form-actions">
+                    <div class="links animate__animated animate__fadeIn">
+                      <a href="register" class="btn btn-orange" role="button">Registrati</a>
+                    </div>
+                  </div>
+                  <div class="space"></div>
+                  <div class="pt-1 mb-4 animate__animated animate__fadeIn">
+                    <button data-mdb-button-init data-mdb-ripple-init class="btn btn-dark btn-lg btn-block" type="button" [disabled]="success" (click)="login()">Accedi</button>
+                  </div>
+                </form>
+
+                <div *ngIf="success && requested" class="alert alert-success d-flex align-items-center animate__animated animate__fadeIn" role="alert">
+                  <div>
+                    <i class="bi bi-check-circle"></i> &nbsp; Autenticazione effettuata correttamente.
+                  </div>
+                </div>
+
+                <div *ngIf="!success && requested && errorMessage" class="alert alert-danger d-flex align-items-center animate__animated animate__fadeIn" role="alert">
+                  <div>
+                    <i class="bi bi-exclamation-circle"></i> &nbsp; {{ errorMessage }}
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

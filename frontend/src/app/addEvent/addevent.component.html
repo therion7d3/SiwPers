@@ -1,0 +1,103 @@
+<section class="background" style="background-color: #fff5ea;">
+<div class="container">
+  <div class="card">
+    <div class="card-header text-center text-white align-items-center" style="background-color: #ff9224;">
+      <h4><i class="bi bi-calendar-day-fill"></i> Organizza un nuovo evento</h4>
+    </div>
+    <div class="card-body" style="background-color: #feeed9;">
+      <form #form="ngForm" (ngSubmit)="submitForm()" novalidate>
+        <div class="form-group">
+          <label for="titolo">Titolo</label>
+          <div class="space"></div>
+          <input type="text" class="form-control" id="titolo" placeholder="Inserisci il titolo della tua ricetta"
+                 [(ngModel)]="event.title" name="title" required #title="ngModel">
+
+          <div class="space"></div>
+          <div *ngIf="title.invalid && (title.dirty || title.touched)" class="alert alert-warning">
+            <i class="bi bi-exclamation-triangle"></i> Inserisci un titolo valido.
+          </div>
+
+          <label for="description">Descrizione (max 500 caratteri)</label>
+          <div class="space"></div>
+          <textarea class="form-control" id="description" rows="3" [(ngModel)]="event.description" name="description" maxlength="499" required #description="ngModel"></textarea>
+          <div class="space"></div>
+          <div *ngIf="description.invalid && (description.dirty || description.touched)" class="alert alert-warning">
+            <i class="bi bi-exclamation-triangle"></i> La descrizione è obbligatoria e deve essere inferiore a 500 caratteri.
+          </div>
+
+          <div class="space"></div>
+          <label for="maxTickets">Capienza</label>
+          <div class="space"></div>
+          <input type="number" class="form-control" id="maxTickets" placeholder="Inserisci la capienza massima dell'evento"
+                 [(ngModel)]="event.maxTickets" name="maxTickets" required min="25" #maxTickets="ngModel">
+          <div class="space"></div>
+          <div *ngIf="maxTickets.invalid && (maxTickets.dirty || maxTickets.touched)" class="alert alert-warning">
+            <i class="bi bi-exclamation-triangle"></i> Inserisci una capienza valida (minimo 25 persone).
+          </div>
+
+          <div class="space"></div>
+          <label for="dataEvento">Data Evento</label>
+          <div class="space"></div>
+          <input type="date" class="form-control" id="dataEvento" placeholder="Seleziona la data dell'evento"
+                 [(ngModel)]="event.dataEvento" name="dataEvento" required [min]="todayDate()" #dataEvento="ngModel">
+          <div class="space"></div>
+          <div *ngIf="!isValidDate() && (dataEvento.dirty || dataEvento.touched)" class="alert alert-warning">
+            <i class="bi bi-exclamation-triangle"></i> Inserisci una data valida superiore a oggi.
+          </div>
+
+
+
+
+          <div class="space"></div>
+          <label for="tipologiaEvento">Tipologia Evento</label>
+          <div class="space"></div>
+          <select class="form-control" id="tipologiaEvento" [(ngModel)]="event.tipoEvento" name="eventType" required>
+            <option value="" disabled selected>Scegli la tipologia di evento</option>
+            <option value="Conferenza">Conferenza</option>
+            <option value="Esposizione">Esposizione</option>
+            <option value="Festival">Festival</option>
+            <option value="Concerto">Concerto</option>
+            <option value="Aziendale">Aziendale</option>
+          </select>
+
+          <div class="space"></div>
+          <label for="image">Carica Copertina</label>
+          <div class="space"></div>
+          <input type="file" class="form-control" id="image" (change)="onImageSelected($event,1)">
+          <div class="space"></div>
+          <div class="image-preview-container" *ngIf="event.immagineUrl">
+            <img [src]="event.immagineUrl" alt="Anteprima Immagine" class="img-thumbnail">
+          </div>
+
+          <label for="image2">Carica immagine</label>
+          <div class="space"></div>
+          <input type="file" class="form-control" id="image2" (change)="onImageSelected($event, 2)">
+          <div class="space"></div>
+          <div class="image-preview-container" *ngIf="event.immagineUrl2">
+            <img [src]="event.immagineUrl2" alt="Anteprima Immagine" class="img-thumbnail">
+          </div>
+
+          <label for="image3">Carica immagine</label>
+          <div class="space"></div>
+          <input type="file" class="form-control" id="image3" (change)="onImageSelected($event, 3)">
+          <div class="space"></div>
+          <div class="image-preview-container" *ngIf="event.immagineUrl3">
+            <img [src]="event.immagineUrl3" alt="Anteprima Immagine" class="img-thumbnail">
+          </div>
+
+          <div class="space mb-3"></div>
+
+          <!-- Pulsante Salva posizionato sulla destra -->
+          <div class="d-flex justify-content-end mb-3">
+            <button type="submit" class="btn btn-success" [disabled]="!form.valid || formSubmitted">Salva Ricetta</button>
+          </div>
+          <div class="alert alert-success" *ngIf="formSubmitted">
+            {{ successMessage }}
+          </div>
+        </div>
+      </form>
+      <div class="space"></div>
+      </div>
+  </div>
+</div>
+</section>

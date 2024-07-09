@@ -1,0 +1,11 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  padding: 20px;
+}
+
+.background {
+  min-height: 100vh; /* Altezza minima del 100% del viewport */
+  background-color: #fff3cf;
+  padding-bottom: 20px; /* Aggiungi padding in basso per spazio tra la section e il footer */
+}
