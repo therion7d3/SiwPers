@@ -62,27 +62,27 @@
           <!-- Pulsante Registrati -->
           <button type="submit" class="btn btn-dark btn-block animate__animated animate__fadeIn" [disabled]="!registrazioneForm.valid || success" style="background-color: #ff9100; border-color: #ff9100; width: 25%;">Registrati</button>
           <div class="space"></div>
-          <!-- Messaggio di errore per password non corrispondenti -->
-          <div *ngIf="!success && registrazioneForm.valid && confirmPassword !== '' && !passwordsMatch()" class="alert alert-warning d-flex align-items-center animate__animated animate__fadeIn" role="alert">
-            <i class="bi bi-exclamation-circle"></i> &nbsp; Le password inserite non corrispondono.
-          </div>
-          <!-- Messaggio di errore per email non valida -->
-          <div *ngIf="!success && registrazioneForm.valid && !emailValid && passwordsMatch()" class="alert alert-warning d-flex align-items-center animate__animated animate__fadeIn" role="alert">
-            <i class="bi bi-exclamation-circle"></i> &nbsp; Inserisci un'email valida.
-          </div>
-          <!-- Messaggio di errore per email già esistente -->
-          <div *ngIf="!success && registrazioneForm.valid && errore" class="alert alert-danger d-flex align-items-center animate__animated animate__fadeIn" role="alert">
-            <i class="bi bi-exclamation-circle"></i> &nbsp; Esiste già un account con questa email.
-          </div>
-          <!-- Messaggio di errore per form non valido -->
-          <div *ngIf="!success && !registrazioneForm.valid && registrazioneForm.dirty && !passwordsMatch() && emailValid && !errore" class="alert alert-danger d-flex align-items-center animate__animated animate__fadeIn" role="alert">
-            <i class="bi bi-exclamation-circle"></i> &nbsp; Compila correttamente tutti i campi.
-          </div>
-          <!-- Messaggio di successo -->
-          <div *ngIf="success" class="alert alert-success d-flex align-items-center animate__animated animate__fadeIn" role="alert">
-            <i class="bi bi-check-circle"></i> &nbsp; Registrazione effettuata con successo.
-          </div>
         </form>
+        <!-- Messaggio di errore per password non corrispondenti -->
+        <div *ngIf="!success && registrazioneForm.valid && confirmPassword !== '' && !passwordsMatch()" class="alert alert-warning d-flex align-items-center animate__animated animate__fadeIn" role="alert">
+          <i class="bi bi-exclamation-circle"></i> &nbsp; Le password inserite non corrispondono.
+        </div>
+        <!-- Messaggio di errore per email non valida -->
+        <div *ngIf="!success && registrazioneForm.valid && !emailValid && passwordsMatch()" class="alert alert-warning d-flex align-items-center animate__animated animate__fadeIn" role="alert">
+          <i class="bi bi-exclamation-circle"></i> &nbsp; Inserisci un'email valida.
+        </div>
+        <!-- Messaggio di errore per email già esistente -->
+        <div *ngIf="!success && registrazioneForm.valid && errore" class="alert alert-danger d-flex align-items-center animate__animated animate__fadeIn" role="alert">
+          <i class="bi bi-exclamation-circle"></i> &nbsp; Esiste già un account con questa email.
+        </div>
+        <!-- Messaggio di errore per form non valido -->
+        <div *ngIf="!success && !registrazioneForm.valid && registrazioneForm.dirty && !passwordsMatch() && emailValid && !errore" class="alert alert-danger d-flex align-items-center animate__animated animate__fadeIn" role="alert">
+          <i class="bi bi-exclamation-circle"></i> &nbsp; Compila correttamente tutti i campi.
+        </div>
+        <!-- Messaggio di successo -->
+        <div *ngIf="success" class="alert alert-success d-flex align-items-center animate__animated animate__fadeIn" role="alert">
+          <i class="bi bi-check-circle"></i> &nbsp; Registrazione effettuata con successo.
+        </div>
       </div>
     </div>
   </div>
