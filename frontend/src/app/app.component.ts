@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {RouterOutlet, RouterLink, RouterLinkActive} from '@angular/router';
 import {NgForOf, NgIf} from "@angular/common";
 import { AuthService } from "./services/auth.service";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-root',
@@ -17,9 +18,10 @@ export class AppComponent implements OnInit {
   username: string | null = '';
   userId: number | null = null;
 
-  constructor(protected authService: AuthService) {};
+  constructor(private titleService: Title, protected authService: AuthService) {};
 
   ngOnInit(): void {
+    this.titleService.setTitle("AuraEventi");
     this.username = this.authService.getUsername();
     this.userId = this.authService.getUserId();
   }
